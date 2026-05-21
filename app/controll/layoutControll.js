@@ -1,13 +1,14 @@
-import { html } from '../dom/element.js';
+import { html, mainImage } from '../dom/element.js';
+import { changeContext } from '../services/service.js';
 
 export function layoutFocus() {
-    html.setAttribute('data-contexto', 'foco');
+    changeContext('foco');
 }
 
-export function layoutShortRest() { 
-html.setAttribute('data-contexto', 'descanso-curto');
+export function layoutShortRest() {
+    changeContext('descanso-curto');
 }
 
-export function layoutLongRest()  {
-html.setAttribute('data-contexto', 'descanso-longo');    
+export function layoutLongRest() {
+    changeContext('descanso-longo');
 }
