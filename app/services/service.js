@@ -1,25 +1,17 @@
-import { html, mainImage, mainTitle } from "../dom/element.js";
+import { html, mainImage, btnFocus, btnShort, btnLong } from '../dom/element.js';
+import { changeContext } from '../controll/layoutControll.js';
 
-export function changeContext(context) {
+export function layoutFocus() {
+    changeContext('foco');
+    btnFocus.classList.add('active');
+}
 
-    html.setAttribute('data-contexto', context);
-    mainImage.setAttribute('src', `imagens/${context}.png`);
-    switch (context) {
-        case 'foco':
-            mainTitle.innerHTML = `Otimize sua produtividade,<br>
-                <strong class="app__title-strong">mergulhe no que importa.</strong>`;
+export function layoutShortRest() {
+    changeContext('descanso-curto');
+    btnShort.classList.add('active');
+}
 
-            break;
-        case 'descanso-curto':
-            mainTitle.innerHTML = `Que tal dar uma respirada? 
-                    <strong class="app__title-strong">Faça uma pausa curta!</strong>`;
-
-            break;
-        case 'descanso-longo':
-            mainTitle.innerHTML = `Hora de voltar à superfície.
-                    <strong class="app__title-strong"> Faça uma pausa longa.</strong>`;
-                    
-        default:
-            break;
-    }
+export function layoutLongRest() {
+    changeContext('descanso-longo');
+    btnLong.classList.add('active');
 }
