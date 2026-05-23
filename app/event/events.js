@@ -1,5 +1,5 @@
-import { btnFocus, btnShort, btnLong } from "../dom/element.js";
-import { layoutFocus, layoutShortRest, layoutLongRest } from "../services/service.js";
+import { btnFocus, btnShort, btnLong, musicFocusInput } from "../dom/element.js";
+import { layoutFocus, layoutShortRest, layoutLongRest, musicPlayback } from "../services/service.js";
 
 export function registerEvents() {
 
@@ -16,4 +16,7 @@ export function registerEvents() {
         layoutLongRest()
     });
 
+    musicFocusInput.addEventListener('change', () => {
+        musicPlayback();
+    });
 }

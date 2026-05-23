@@ -5,3 +5,5 @@ export const btnLong = document.querySelector('.app__card-button--longo');
 export const mainImage = document.querySelector('.app__image');
 export const mainTitle = document.querySelector('.app__title');
 export const contextButtons = document.querySelectorAll('.app__card-button');
+export const musicFocusInput = document.querySelector('#alternar-musica');
+export const music = new Audio('/sons/luna-rise-part-one.mp3');
