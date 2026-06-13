@@ -7,3 +7,7 @@ export const mainTitle = document.querySelector('.app__title');
 export const contextButtons = document.querySelectorAll('.app__card-button');
 export const musicFocusInput = document.querySelector('#alternar-musica');
 export const music = new Audio('/sons/luna-rise-part-one.mp3');
+export const btnStartPause = document.querySelector('#start-pause');
+export const startSound = new Audio('/sons/play.wav');
+export const pauseSound = new Audio('/sons/pause.mp3');
+export const imgStartPause = document.querySelector('.app__card-primary-butto-icon');
