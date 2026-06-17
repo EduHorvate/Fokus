@@ -21,7 +21,7 @@ export function registerEvents() {
     });
 
     btnStartPause.addEventListener('click', () => {
-       // startTimer();
+        startTimer();
         soundControlTimer();
     });
 }

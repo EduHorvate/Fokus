@@ -1,7 +1,20 @@
-import { html, mainImage, btnFocus, btnShort, btnLong, music, startSound, pauseSound, btnStartPause, imgStartPause } from '../dom/element.js';
+import {
+    html,
+    mainImage,
+    btnFocus,
+    btnShort,
+    btnLong,
+    music,
+    startSound,
+    pauseSound,
+    alarmSound,
+    btnStartPause,
+    imgStartPause,
+    startButtonName
+} from '../dom/element.js';
 import { changeContext } from '../controll/layoutControll.js';
 
-let tempoDecorridoEmSegundos = 5;
+let tempoDecorridoEmSegundos = 10;
 let intervalId = null;
 
 export function layoutFocus() {
@@ -31,9 +44,13 @@ export function musicPlayback() {
 export const testeTimer = () => {
     tempoDecorridoEmSegundos -= 1;
     if (tempoDecorridoEmSegundos <= 0) {
+        startButtonName.textContent = 'Começar';
         resetTimer();
         alert('Tempo esgotado!');
         return
+    }
+    if (tempoDecorridoEmSegundos === 6) {
+        alarmSound.play();
     }
     console.log(tempoDecorridoEmSegundos);
 }
@@ -48,16 +65,17 @@ export function resetTimer() {
 }
 
 export function soundControlTimer() {
-
     if (btnStartPause.classList.contains('play')) {
         startSound.play();
         btnStartPause.classList.remove('play');
         btnStartPause.classList.add('pause');
         imgStartPause.src = '/imagens/pause.png';
+        startButtonName.textContent = 'Pausar';
     } else if (btnStartPause.classList.contains('pause')) {
         pauseSound.play();
         btnStartPause.classList.remove('pause');
         btnStartPause.classList.add('play');
         imgStartPause.src = '/imagens/play_arrow.png';
+        startButtonName.textContent = 'Começar';
     }
 }
