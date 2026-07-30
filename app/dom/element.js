@@ -13,3 +13,4 @@ export const pauseSound = new Audio('/sons/pause.mp3');
 export const alarmSound = new Audio('/sons/beep.mp3');
 export const imgStartPause = document.querySelector('.app__card-primary-butto-icon');
 export const startButtonName = document.querySelector('span');
+export const timer = document.getElementById('timer');

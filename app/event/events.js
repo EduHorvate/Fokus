@@ -1,5 +1,5 @@
 import { btnFocus, btnShort, btnLong, musicFocusInput, btnStartPause, startSound } from "../dom/element.js";
-import { layoutFocus, layoutShortRest, layoutLongRest, musicPlayback, startTimer, soundControlTimer } from "../services/service.js";
+import { layoutFocus, layoutShortRest, layoutLongRest, musicPlayback, soundControlTimer, StartOrPauseTimer } from "../services/service.js";
 
 export function registerEvents() {
 
@@ -21,7 +21,6 @@ export function registerEvents() {
     });
 
     btnStartPause.addEventListener('click', () => {
-        startTimer();
-        soundControlTimer();
+        StartOrPauseTimer();
     });
 }

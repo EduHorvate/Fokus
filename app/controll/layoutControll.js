@@ -1,6 +1,8 @@
 import { html, mainImage, mainTitle, contextButtons } from "../dom/element.js";
+import { showTimeOnScreen } from "../services/service.js";
 
 export function changeContext(context) {
+    showTimeOnScreen();
 
     contextButtons.forEach(button => {
         button.classList.remove('active');

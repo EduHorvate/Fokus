@@ -10,24 +10,28 @@ import {
     alarmSound,
     btnStartPause,
     imgStartPause,
-    startButtonName
+    startButtonName,
+    timer
 } from '../dom/element.js';
 import { changeContext } from '../controll/layoutControll.js';
 
-let tempoDecorridoEmSegundos = 10;
+let elapsedTimeInSeconds = 1500;
 let intervalId = null;
 
 export function layoutFocus() {
+    elapsedTimeInSeconds = 1500;
     changeContext('foco');
     btnFocus.classList.add('active');
 }
 
 export function layoutShortRest() {
+    elapsedTimeInSeconds = 300;
     changeContext('descanso-curto');
     btnShort.classList.add('active');
 }
 
 export function layoutLongRest() {
+    elapsedTimeInSeconds = 900;
     changeContext('descanso-longo');
     btnLong.classList.add('active');
 }
@@ -41,22 +45,28 @@ export function musicPlayback() {
     music.loop = true;
 }
 
-export const testeTimer = () => {
-    tempoDecorridoEmSegundos -= 1;
-    if (tempoDecorridoEmSegundos <= 0) {
+export const countdown = () => {
+    elapsedTimeInSeconds -= 1;
+    if (elapsedTimeInSeconds <= 0) {
+         resetTimer();
+         alarmSound.play();
         startButtonName.textContent = 'Começar';
-        resetTimer();
+        imgStartPause.src = '/imagens/play_arrow.png';
+        btnStartPause.classList.remove('pause');
+        btnStartPause.classList.add('play');
         alert('Tempo esgotado!');
-        return
+        return;
     }
-    if (tempoDecorridoEmSegundos === 6) {
-        alarmSound.play();
-    }
-    console.log(tempoDecorridoEmSegundos);
+    showTimeOnScreen();
 }
 
-export function startTimer() {
-    intervalId = setInterval(testeTimer, 1000);
+export function StartOrPauseTimer() {
+    soundControlTimer();
+    if (intervalId !== null) {
+        resetTimer();
+        return;
+    } 
+    intervalId = setInterval(countdown, 1000);
 }
 
 export function resetTimer() {
@@ -66,16 +76,35 @@ export function resetTimer() {
 
 export function soundControlTimer() {
     if (btnStartPause.classList.contains('play')) {
-        startSound.play();
-        btnStartPause.classList.remove('play');
-        btnStartPause.classList.add('pause');
-        imgStartPause.src = '/imagens/pause.png';
-        startButtonName.textContent = 'Pausar';
-    } else if (btnStartPause.classList.contains('pause')) {
-        pauseSound.play();
-        btnStartPause.classList.remove('pause');
-        btnStartPause.classList.add('play');
-        imgStartPause.src = '/imagens/play_arrow.png';
-        startButtonName.textContent = 'Começar';
+      playState();
+    } else {
+       pauseState();
     }
 }
+
+function playState() {
+    startSound.play();
+
+    btnStartPause.classList.remove('play');
+    btnStartPause.classList.add('pause');
+
+    imgStartPause.src = '/imagens/pause.png';
+    startButtonName.textContent = 'Pausar';
+}
+
+function pauseState() {
+    pauseSound.play();
+
+    btnStartPause.classList.remove('pause');
+    btnStartPause.classList.add('play');
+
+    imgStartPause.src = '/imagens/play_arrow.png';
+    startButtonName.textContent = 'Começar';
+}
+
+export function showTimeOnScreen() {
+    const showTimer = new Date(elapsedTimeInSeconds * 1000).toISOString().substr(14, 5);
+    timer.innerHTML = `${showTimer}`;
+}
+
+showTimeOnScreen();
